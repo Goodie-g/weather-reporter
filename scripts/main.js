@@ -1,4 +1,4 @@
-import { apiKey } from "./apiKey.js";
+import { apiKey } from "./.gitignore/apiKey.js";
 
 const searchElement = document.querySelector('.js-search');
 const location = String(searchElement.input);
@@ -32,4 +32,4 @@ searchButton.addEventListener('click', () => {
     getWeather();
 });
 
-getWeather
+getWeather();
