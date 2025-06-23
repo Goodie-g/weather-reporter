@@ -1,7 +1,12 @@
 import { apiKey } from "./apiKey.js";
 
+const searchElement = document.querySelector('.js-search');
+console.log(typeof searchElement.input)
+location = String(searchElement.input);
+
 async function getWeather(location) {
-    try { 
+    try {
+
         if (!location) {
             throw new Error("location is required.");
         }
@@ -15,25 +20,29 @@ async function getWeather(location) {
         }
 
     } catch(error) {
+        // switch (webError.code) {
+        //     case webError
+        // }
         console.log('Error:', error.message);
     }
 }
 
 const searchButton = document.querySelector('.js-search-button');
-const searchInput = document.querySelector('.js-search-input');
 
 searchButton.addEventListener('click', () => {
-    const location = searchInput.value.trim();
-    getWeather(location);
+    getWeather();
 });
+
+getWeather('-6.803564, 39.1903455');
 
 if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
+        console.log(`${latitude}, ${longitude}`);
 
-        getWeather(`${latitude}, ${longitude}`).then()
+        alert(`Location found! Latitude: ${latitude}, ${longitude}`);
     },
     (error) => {
         let errorMessage;
@@ -64,5 +73,4 @@ if ("geolocation" in navigator) {
 } else {
   alert("Geolocation is not supported by your browser.");
 }
-
-
+        
