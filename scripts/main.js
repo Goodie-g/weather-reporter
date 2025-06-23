@@ -13,6 +13,7 @@ async function getWeather(location) {
         if (weatherData.error) {
             throw new Error(weatherData.error.message)
         }
+        return weatherData;
 
     } catch(error) {
         console.log('Error:', error.message);
@@ -24,8 +25,17 @@ const searchInput = document.querySelector('.js-search-input');
 
 searchButton.addEventListener('click', () => {
     const location = searchInput.value.trim();
-    getWeather(location);
+    getWeather(location).then((weatherData) => {
+            document.querySelector('.js-weather-details')
+                .innerHTML = `
+                <div>Current temp: ${weatherData.current.temp_c}</div>
+                <div>Feels like: ${weatherData.current.feelslike_c}</div>
+                `;
+        });
 });
+
+document.querySelector('.js-weather-details')
+    .innerHTML = 'Loading...'
 
 if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -33,7 +43,13 @@ if ("geolocation" in navigator) {
         const longitude = position.coords.longitude;
 
 
-        getWeather(`${latitude}, ${longitude}`).then()
+        getWeather(`${latitude}, ${longitude}`).then((weatherData) => {
+            document.querySelector('.js-weather-details')
+                .innerHTML = `
+                <div>Current temp: ${weatherData.current.temp_c}</div>
+                <div>Feels like: ${weatherData.current.feelslike_c}</div>
+                `;
+        });
     },
     (error) => {
         let errorMessage;
