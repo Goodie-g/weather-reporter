@@ -5,7 +5,7 @@ async function getWeather(location) {
         if (!location) {
             throw new Error("location is required.");
         }
-        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`);
+        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&aqi=no`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
        
         const weatherData = await response.json();
@@ -23,14 +23,28 @@ async function getWeather(location) {
 const searchButton = document.querySelector('.js-search-button');
 const searchInput = document.querySelector('.js-search-input');
 
-searchButton.addEventListener('click', () => {
-    const location = searchInput.value.trim();
-    getWeather(location).then((weatherData) => {
+searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        const location = searchInput.value.trim();
+        getWeather(location).then((weatherData) => {
             document.querySelector('.js-weather-details')
                 .innerHTML = `
                 <div>Current temp: ${weatherData.current.temp_c}</div>
                 <div>Feels like: ${weatherData.current.feelslike_c}</div>
                 `;
+        });
+        searchInput.value = '';
+    }
+});
+
+searchButton.addEventListener('click', () => {
+    const location = searchInput.value.trim();
+    getWeather(location).then((weatherData) => {
+        document.querySelector('.js-weather-details')
+            .innerHTML = `
+            <div>Current temp: ${weatherData.current.temp_c}</div>
+            <div>Feels like: ${weatherData.current.feelslike_c}</div>
+            `;
         });
 });
 
@@ -41,7 +55,6 @@ if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-
 
         getWeather(`${latitude}, ${longitude}`).then((weatherData) => {
             document.querySelector('.js-weather-details')
@@ -80,5 +93,3 @@ if ("geolocation" in navigator) {
 } else {
   alert("Geolocation is not supported by your browser.");
 }
-
-
