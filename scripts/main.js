@@ -1,4 +1,5 @@
 import { apiKey } from "./apiKey.js";
+import dayjs from 'https://cdn.skypack.dev/dayjs';
 
 async function getWeather(location) {
     try { 
@@ -9,11 +10,10 @@ async function getWeather(location) {
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
        
         const weatherData = await response.json();
-        console.log(weatherData);
         if (weatherData.error) {
             throw new Error(weatherData.error.message)
         }
-
+        console.log(weatherData)
         return weatherData;
     } catch(error) {
         console.log('Error:', error.message);
@@ -34,9 +34,8 @@ function displayWeatherData(weatherData) {
         <div>Feels like: ${Math.round(weatherData.current.feelslike_c)}\u00B0 ${tempUnits.C}</div>
         <div>Condition: ${weatherData.current.condition.text}</div>
         <div>Humidity: ${weatherData.current.humidity}mm, wind:${weatherData.current.wind_kph}kph (${weatherData.current.wind_degree}\u00B0 ${weatherData.current.wind_dir})</div>
-        <section class="hourly-forecast">
-            
-        </section>
+        <section class="hourly-forecast js-hourly-forecast"></section>
+        <section class="ten-day-forecast js-ten-day-forecast"></section>
         `;
 }
 
@@ -48,6 +47,8 @@ searchInput.addEventListener('keydown', (event) => {
         const location = searchInput.value.trim();
         getWeather(location).then((weatherData) => {
             displayWeatherData(weatherData);
+            displayHourlyForecast(weatherData);
+            displayTenDayForecast(weatherData);
         });
         searchInput.value = '';
     }
@@ -57,6 +58,8 @@ searchButton.addEventListener('click', () => {
     const location = searchInput.value.trim();
     getWeather(location).then((weatherData) => {
         displayWeatherData(weatherData);
+        displayHourlyForecast(weatherData);
+        displayTenDayForecast(weatherData);
     });
 });
 
@@ -70,6 +73,9 @@ if ("geolocation" in navigator) {
 
         getWeather(`${latitude}, ${longitude}`).then((weatherData) => {
             displayWeatherData(weatherData);
+            displayHourlyForecast(weatherData);
+            displayTenDayForecast(weatherData);
+            
         });
     },
     (error) => {
@@ -101,3 +107,36 @@ if ("geolocation" in navigator) {
 } else {
   alert("Geolocation is not supported by your browser.");
 }
+
+function displayHourlyForecast(weatherData) {
+    const weatherForecast = weatherData.forecast.forecastday;
+    const [firstDay] = weatherForecast;
+    console.log(firstDay);
+    firstDay.hour.map(hourOfTheDay => {
+        document.querySelector('.js-hourly-forecast')
+            .innerHTML += `
+            <section class="hour-forecast">
+                <div>hours</div>
+                <div>${hourOfTheDay.temp_c}</div>
+                <div>MaxTemp: ${hourOfTheDay.condition.text}</div>
+            </section>
+            `;
+    }).join('');
+        
+}
+
+function displayTenDayForecast(weatherData) {
+    const weatherForecast = weatherData.forecast.forecastday;
+    weatherForecast.map(day => {
+        document.querySelector('.js-ten-day-forecast')
+            .innerHTML += `
+            <section class="days-forecast">
+                <div>10 day forecast</div>
+                <div>${dayjs(day.date).format('ddd')}</div>
+                <div>MaxTemp: ${day.day.maxtemp_c} MinTemp: ${day.day.mintemp_c}</div>
+            </section>
+            `;
+    }).join('');
+}
+
+
