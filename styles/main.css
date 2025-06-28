@@ -2,3 +2,19 @@ body {
     font-family: 'poppins', sans-serif;
 }
 
+.hourly-forecast {
+    display: flex;
+    flex-direction: row;
+}
+
+.hour-forecast {
+    display: flex;
+}
+
+.ten-day-forecast {
+    display: flex;
+}
+
+.days-forecast {
+    display: flex;
+}

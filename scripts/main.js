@@ -34,8 +34,12 @@ function displayWeatherData(weatherData) {
         <div>Feels like: ${Math.round(weatherData.current.feelslike_c)}\u00B0 ${tempUnits.C}</div>
         <div>Condition: ${weatherData.current.condition.text}</div>
         <div>Humidity: ${weatherData.current.humidity}mm, wind:${weatherData.current.wind_kph}kph (${weatherData.current.wind_degree}\u00B0 ${weatherData.current.wind_dir})</div>
-        <section class="hourly-forecast js-hourly-forecast"></section>
-        <section class="ten-day-forecast js-ten-day-forecast"></section>
+        <section class="hourly-forecast js-hourly-forecast">
+            <div>hourly forecast</div>
+        </section>
+        <section class="ten-day-forecast js-ten-day-forecast">
+            <div>10 day forecast</div>
+        </section>
         `;
 }
 
@@ -116,8 +120,8 @@ function displayHourlyForecast(weatherData) {
         document.querySelector('.js-hourly-forecast')
             .innerHTML += `
             <section class="hour-forecast">
-                <div>hours</div>
-                <div>${hourOfTheDay.temp_c}</div>
+                <div>${hourOfTheDay.time}</div>
+                <div>${Math.round(hourOfTheDay.temp_c)}</div>
                 <div>MaxTemp: ${hourOfTheDay.condition.text}</div>
             </section>
             `;
@@ -131,9 +135,9 @@ function displayTenDayForecast(weatherData) {
         document.querySelector('.js-ten-day-forecast')
             .innerHTML += `
             <section class="days-forecast">
-                <div>10 day forecast</div>
                 <div>${dayjs(day.date).format('ddd')}</div>
-                <div>MaxTemp: ${day.day.maxtemp_c} MinTemp: ${day.day.mintemp_c}</div>
+                <div>MaxTemp: ${Math.round(day.day.maxtemp_c)} </div>
+                <div>MinTemp: ${Math.round(day.day.mintemp_c)}</div>
             </section>
             `;
     }).join('');
