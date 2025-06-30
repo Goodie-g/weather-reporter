@@ -122,7 +122,7 @@ function displayHourlyForecast(weatherData) {
             <section class="hour-forecast">
                 <div>${hourOfTheDay.time}</div>
                 <div>${Math.round(hourOfTheDay.temp_c)}</div>
-                <div>MaxTemp: ${hourOfTheDay.condition.text}</div>
+                <div>Condition: ${hourOfTheDay.condition.text}</div>
             </section>
             `;
     }).join('');
