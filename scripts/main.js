@@ -38,7 +38,7 @@ function displayWeatherData(weatherData) {
             <div>hourly forecast</div>
         </section>
         <section class="ten-day-forecast js-ten-day-forecast">
-            <div>10 day forecast</div>
+            <div>3 day forecast</div>
         </section>
         `;
 }

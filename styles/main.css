@@ -2,6 +2,33 @@ body {
     font-family: 'poppins', sans-serif;
 }
 
+main {
+    width: 85%;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgb(241, 241, 241);
+    border-radius: 10px;
+}
+
+.pad-2 {
+    padding: 0 0.5rem;
+}
+
+.heading {
+    font-size: 1.5rem;
+}
+
+.settings-icon {
+    width: 1.7rem;
+    cursor: pointer;
+}
+
 .hourly-forecast {
     display: flex;
     flex-direction: row;
