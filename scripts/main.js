@@ -32,7 +32,7 @@ function displayWeatherData(weatherData) {
     document.querySelector('.js-weather-details')
         .innerHTML = `
         <section class="current-weather">
-        <div class="location">${weatherData.location.name}, ${currentWeather.country}</div>
+        <div class="location">${weatherData.location.name}, ${weatherData.location.country}</div>
         <img src="${currentWeather.condition.icon}">
         <div>Current temp: ${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
         <div>Feels like: ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
