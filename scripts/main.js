@@ -6,7 +6,7 @@ async function getWeather(location) {
         if (!location) {
             throw new Error("location is required.");
         }
-        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&aqi=no&days=10`);
+        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&aqi=no&days=3`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
        
         const weatherData = await response.json();
@@ -26,20 +26,33 @@ function displayWeatherData(weatherData) {
         F: 'F'
     };
 
+    const currentWeather = weatherData.current;
+    console.log(currentWeather);
+
     document.querySelector('.js-weather-details')
         .innerHTML = `
-        <img src="${weatherData.current.condition.icon}">
-        <div>Location: ${weatherData.location.name}, ${weatherData.location.country}</div>
-        <div>Current temp: ${Math.round(weatherData.current.temp_c)}\u00B0 ${tempUnits.C}</div>
-        <div>Feels like: ${Math.round(weatherData.current.feelslike_c)}\u00B0 ${tempUnits.C}</div>
-        <div>Condition: ${weatherData.current.condition.text}</div>
-        <div>Humidity: ${weatherData.current.humidity}mm, wind:${weatherData.current.wind_kph}kph (${weatherData.current.wind_degree}\u00B0 ${weatherData.current.wind_dir})</div>
-        <section class="hourly-forecast js-hourly-forecast">
-            <div>hourly forecast</div>
+        <section class="current-weather">
+        <div class="location">${weatherData.location.name}, ${currentWeather.country}</div>
+        <img src="${currentWeather.condition.icon}">
+        <div>Current temp: ${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
+        <div>Feels like: ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
+        <div>Condition: ${currentWeather.condition.text}</div>
         </section>
-        <section class="ten-day-forecast js-ten-day-forecast">
-            <div>3 day forecast</div>
+        <section class="hourly-forecast-container">
+            <h3>hourly forecast</h3>
+            <section class="hourly-forecast js-hourly-forecast"></section>
         </section>
+        <section class="10-day-forecast-container">
+            <h3>3 day forecast</h3>
+            <section class="ten-day-forecast js-ten-day-forecast"></section>
+        </section>
+        <div>Humidity: ${currentWeather.humidity}mm</div>
+        <div>Wind:${currentWeather.wind_kph}kph (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
+        <div>Precipitation: ${currentWeather.precip_mm}</div>
+        <div>Pressure: ${currentWeather.pressure_mb}</div>
+        <div>UV: ${currentWeather.uv}</div>
+        <div>Visibilty: ${currentWeather.vis_km}</div>
+        
         `;
 }
 
@@ -115,7 +128,6 @@ if ("geolocation" in navigator) {
 function displayHourlyForecast(weatherData) {
     const weatherForecast = weatherData.forecast.forecastday;
     const [firstDay] = weatherForecast;
-    console.log(firstDay);
     firstDay.hour.map(hourOfTheDay => {
         document.querySelector('.js-hourly-forecast')
             .innerHTML += `

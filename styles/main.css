@@ -1,5 +1,6 @@
 body {
     font-family: 'poppins', sans-serif;
+    background-color: #6FB6E7;
 }
 
 main {
@@ -12,7 +13,7 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    background-color: rgb(241, 241, 241);
+    background-color: #A7D8DE;
     border-radius: 10px;
 }
 
@@ -29,9 +30,24 @@ header {
     cursor: pointer;
 }
 
+.current-weather {
+   background-color: #A7D8DE;
+}
+
+.location {
+    font-size: 1.4rem;
+    color: #6FB6E7;
+}
+
+.hourly-forecast-container {
+    
+}
+
 .hourly-forecast {
     display: flex;
-    flex-direction: row;
+    overflow-x: auto;
+
+    width: 43.45rem;
 }
 
 .hour-forecast {
