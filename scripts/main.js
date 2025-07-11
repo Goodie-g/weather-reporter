@@ -36,16 +36,22 @@ function displayWeatherData(weatherData) {
         <img src="${currentWeather.condition.icon}">
         <div class="current-temp">Current temp: ${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
         <div>Feels like: ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
-        <div>Condition: ${currentWeather.condition.text}</div>
+        <div> ${currentWeather.condition.text}</div>
         </section>
+
+
         <section class="hourly-forecast-container">
             <h3>hourly forecast</h3>
             <section class="hourly-forecast js-hourly-forecast"></section>
         </section>
+
+
         <section class="ten-day-forecast-container">
-            <h3>3 day forecast</h3>
+            <h3 class="days-forecast-heading">3 day forecast</h3>
             <section class="ten-day-forecast js-ten-day-forecast"></section>
         </section>
+
+
        <section class="other-weather-details"> 
             <div>Humidity: ${currentWeather.humidity}mm</div>
             <div>Wind:${currentWeather.wind_kph}kph (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
@@ -133,9 +139,9 @@ function displayHourlyForecast(weatherData) {
         document.querySelector('.js-hourly-forecast')
             .innerHTML += `
             <section class="hour-forecast">
-                <div>${hourOfTheDay.time}</div>
+                <div>${dayjs(hourOfTheDay.time).format('HH')}:00</div>
                 <div>${Math.round(hourOfTheDay.temp_c)}</div>
-                <div>Condition: ${hourOfTheDay.condition.text}</div>
+                <div>${hourOfTheDay.condition.text}</div>
             </section>
             `;
     }).join('');
