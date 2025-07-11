@@ -1,0 +1,14 @@
+.hourly-forecast-container {
+    background-color: #A7D8DE;
+}
+
+.hourly-forecast {
+    display: flex;
+    overflow-x: auto;
+
+    width: 43.45rem;
+}
+
+.hour-forecast {
+    display: flex;
+}
