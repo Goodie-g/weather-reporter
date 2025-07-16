@@ -45,7 +45,7 @@
         cursor: pointer;
     }
 
-    .settings-icon:hover {
+    .settings-icon.spin {
         transform: rotate(20deg);
     }
 }

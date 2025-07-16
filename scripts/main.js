@@ -1,5 +1,6 @@
 import { apiKey } from "./apiKey.js";
 import dayjs from 'https://cdn.skypack.dev/dayjs';
+import './settings-icon-spin.js';
 
 async function getWeather(location) {
     try { 
@@ -161,5 +162,4 @@ function displayTenDayForecast(weatherData) {
             `;
     }).join('');
 }
-
 
