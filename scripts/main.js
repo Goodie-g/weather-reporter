@@ -32,13 +32,11 @@ function displayWeatherData(weatherData) {
     document.querySelector('.js-weather-details')
         .innerHTML = `
         <section class="current-weather">
-            <section>
                 <div class="location">${weatherData.location.name}, ${weatherData.location.country}</div>
+                <img src="${currentWeather.condition.icon}">
                 <div class="current-temp">${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
-                <div>Feels like ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
-                <div> ${currentWeather.condition.text}</div>
-            </section>
-            <img src="${currentWeather.condition.icon}">
+                <div class="feels-like">Feels like ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
+                <div class="condition"> ${currentWeather.condition.text}</div>
         </section>
 
 

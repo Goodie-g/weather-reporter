@@ -37,7 +37,33 @@
 
 /* tablet */
 @media(min-width: 768px) {
-    
+    .current-weather {
+      background-color: #A7D8DE;
+      width: 15rem;
+
+      padding: 1rem;
+/* 
+      display: grid;
+      grid-template-columns: 9rem 1fr; */
+   }
+
+   .location {
+      font-size: .9rem;
+      color: #6FB6E7;
+   }
+
+   .current-temp {
+      font-size: 2rem;
+      position: relative;
+      top: -10px;
+   }
+
+   .feels-like,
+   .condition {
+      font-size: 0.9rem;
+      position: relative;
+      top: -10px;
+   }
 }
 
 /* phones */
