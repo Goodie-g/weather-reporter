@@ -1,6 +1,44 @@
-.other-weather-details {
+/* large desktop */
+@media (min-width: 1440px) {
+    .other-weather-details {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 
     margin-top: 1rem;
+
+    width: 14rem;
+
+    }
+}
+
+
+/* laptop */
+@media(min-width: 1024px) {
+    .other-weather-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        margin-top: 1rem;
+
+        /* width: 14rem; */
+
+    }
+}
+
+/* tablet */
+@media(min-width: 768px) {
+    .other-weather-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        margin-top: 1rem;
+
+        width: 14rem;
+
+    }
+}
+
+/* phones */
+@media(min-width: 480px) {
+    
 }

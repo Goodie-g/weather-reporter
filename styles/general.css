@@ -20,3 +20,8 @@ header {
 .pad-2 {
     padding: 0 0.5rem;
 }
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+}

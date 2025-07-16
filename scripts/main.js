@@ -32,33 +32,34 @@ function displayWeatherData(weatherData) {
     document.querySelector('.js-weather-details')
         .innerHTML = `
         <section class="current-weather">
-        <div class="location">${weatherData.location.name}, ${weatherData.location.country}</div>
-        <img src="${currentWeather.condition.icon}">
-        <div class="current-temp">Current temp: ${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
-        <div>Feels like: ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
-        <div> ${currentWeather.condition.text}</div>
+            <section>
+                <div class="location">${weatherData.location.name}, ${weatherData.location.country}</div>
+                <div class="current-temp">${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
+                <div>Feels like ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
+                <div> ${currentWeather.condition.text}</div>
+            </section>
+            <img src="${currentWeather.condition.icon}">
         </section>
 
 
         <section class="hourly-forecast-container">
-            <h3>hourly forecast</h3>
+            <h3>Today</h3>
             <section class="hourly-forecast js-hourly-forecast"></section>
         </section>
 
-
-        <section class="ten-day-forecast-container">
-            <h3 class="days-forecast-heading">3 day forecast</h3>
-            <section class="ten-day-forecast js-ten-day-forecast"></section>
-        </section>
-
-
-       <section class="other-weather-details"> 
+         <section class="other-weather-details"> 
             <div>Humidity: ${currentWeather.humidity}mm</div>
             <div>Wind:${currentWeather.wind_kph}kph (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
             <div>Precipitation: ${currentWeather.precip_mm}</div>
             <div>Pressure: ${currentWeather.pressure_mb}</div>
             <div>UV: ${currentWeather.uv}</div>
             <div>Visibilty: ${currentWeather.vis_km}</div>
+        </section>
+
+
+        <section class="ten-day-forecast-container">
+            <h3 class="days-forecast-heading">3 day forecast</h3>
+            <section class="ten-day-forecast js-ten-day-forecast"></section>
         </section>
         `;
 }
@@ -138,11 +139,11 @@ function displayHourlyForecast(weatherData) {
     firstDay.hour.map(hourOfTheDay => {
         document.querySelector('.js-hourly-forecast')
             .innerHTML += `
-            <section class="hour-forecast">
-                <div>${dayjs(hourOfTheDay.time).format('HH')}:00</div>
-                <div>${Math.round(hourOfTheDay.temp_c)}</div>
-                <div>${hourOfTheDay.condition.text}</div>
-            </section>
+            <div class="hour-forecast">
+                <div>${dayjs(hourOfTheDay.time).format('hh a')}</div>
+                <div>${Math.round(hourOfTheDay.temp_c)}\u00B0 C</div>
+                <div class="condition-in-hour-of-the-day"> ${hourOfTheDay.condition.text}</div>
+            </div>
             `;
     }).join('');
         
@@ -153,10 +154,11 @@ function displayTenDayForecast(weatherData) {
     weatherForecast.map(day => {
         document.querySelector('.js-ten-day-forecast')
             .innerHTML += `
-            <section class="days-forecast">
+            <section class="day-forecast">
                 <div>${dayjs(day.date).format('ddd')}</div>
-                <div>MaxTemp: ${Math.round(day.day.maxtemp_c)} </div>
-                <div>MinTemp: ${Math.round(day.day.mintemp_c)}</div>
+                <div>Hi: ${Math.round(day.day.maxtemp_c)} </div>
+                <img src="${day.day.condition.icon}">
+                <div>Lo: ${Math.round(day.day.mintemp_c)}</div>
             </section>
             `;
     }).join('');

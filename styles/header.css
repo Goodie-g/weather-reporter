@@ -1,8 +1,68 @@
-.heading {
-    font-size: 1.5rem;
+/* large desktop */
+@media (min-width: 1440px) {
+    .heading {
+        font-size: 1rem;
+    }
+
+    .settings-icon {
+        max-width: 1.7rem;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        cursor: pointer;
+    }
+
+    .settings-icon:hover {
+        transform: rotate(20deg);
+    }
 }
 
-.settings-icon {
-    width: 1.7rem;
-    cursor: pointer;
+
+/* laptop */
+@media(min-width: 1024px) {
+    .heading {
+        font-size: 1rem;
+    }
+
+    .settings-icon {
+        max-width: 1.7rem;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        cursor: pointer;
+    }
+
+    .settings-icon:hover {
+        transform: rotate(20deg);
+    }
+}
+
+/* tablet */
+@media(min-width: 768px) {
+    .heading {
+        font-size: 1rem;
+    }
+
+    .settings-icon {
+        max-width: 1.7rem;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        cursor: pointer;
+    }
+
+    .settings-icon:hover {
+        transform: rotate(20deg);
+    }
+}
+
+/* phones */
+@media(min-width: 480px) {
+    .heading {
+        font-size: 1rem;
+    }
+
+    .settings-icon {
+        max-width: 1.7rem;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        cursor: pointer;
+    }
+
+    .settings-icon:hover {
+        transform: rotate(20deg);
+    }
 }
