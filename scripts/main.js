@@ -33,11 +33,13 @@ function displayWeatherData(weatherData) {
     document.querySelector('.js-weather-details')
         .innerHTML = `
         <section class="current-weather">
+            <section class="arrange-content">
                 <div class="location">${weatherData.location.name}, ${weatherData.location.country}</div>
                 <img src="${currentWeather.condition.icon}">
                 <div class="current-temp">${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
                 <div class="feels-like">Feels like ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
                 <div class="condition"> ${currentWeather.condition.text}</div>
+            </section>
         </section>
 
 
@@ -46,7 +48,7 @@ function displayWeatherData(weatherData) {
             <section class="hourly-forecast js-hourly-forecast"></section>
         </section>
 
-         <section class="other-weather-details"> 
+        <section class="other-weather-details"> 
             <div>Humidity: ${currentWeather.humidity}mm</div>
             <div>Wind:${currentWeather.wind_kph}kph (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
             <div>Precipitation: ${currentWeather.precip_mm}</div>

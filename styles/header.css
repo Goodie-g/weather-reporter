@@ -1,42 +1,29 @@
-/* large desktop */
-@media (min-width: 1440px) {
-    .heading {
-        font-size: 1rem;
-    }
-
-    .settings-icon {
-        max-width: 1.7rem;
-        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        cursor: pointer;
-    }
-
-    .settings-icon:hover {
-        transform: rotate(20deg);
-    }
+/* phones */
+.heading {
+    font-size: 1rem;
 }
 
-
-/* laptop */
-@media(min-width: 1024px) {
-    .heading {
-        font-size: 1rem;
-    }
-
-    .settings-icon {
-        max-width: 1.7rem;
-        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        cursor: pointer;
-    }
-
-    .settings-icon:hover {
-        transform: rotate(20deg);
-    }
+.settings-icon {
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    cursor: pointer;
 }
+
+.settings-icon:hover {
+    transform: rotate(20deg);
+}
+
 
 /* tablet */
 @media(min-width: 768px) {
     .heading {
-        font-size: 1rem;
+        font-size: 1.5rem;
+        color: #6FB6E7;
+
+        margin: 0;
+
+        position: relative;
+        top: 1px;
+        left: 6px;
     }
 
     .search {
@@ -48,7 +35,7 @@
     }
 
     .search-input {
-        height: 3rem;
+        height: 2.5rem;
 
         border: none;
         border-radius: 10px;
@@ -58,8 +45,8 @@
     }
 
     .search-button {
-        height: 3rem;
-        min-width: 3rem;
+        height: 2.5rem;
+        width: 2.55rem;
         
         border: none;
         border-radius: 10px;
@@ -72,9 +59,14 @@
     }
 
     .settings-icon {
-        max-width: 1.7rem;
         transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         cursor: pointer;
+
+        position: relative;
+        right: 5px;
+        bottom: -1px;
+
+        color: #6FB6E7;
     }
 
     .settings-icon.spin {
@@ -82,16 +74,35 @@
     }
 }
 
-/* phones */
-@media(min-width: 480px) {
+/* laptop */
+@media(min-width: 1024px) {
     .heading {
         font-size: 1rem;
     }
 
     .settings-icon {
-        max-width: 1.7rem;
         transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         cursor: pointer;
+    }
+
+    .settings-icon:hover {
+        transform: rotate(20deg);
+    }
+}
+
+/* large desktop */
+@media (min-width: 1440px) {
+    .heading {
+        font-size: 1rem;
+
+        margin: 0.5rem;
+    }
+
+    .settings-icon {
+        /* max-width: 1.7rem; */
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        cursor: pointer;
+        color: #6FB6E7;
     }
 
     .settings-icon:hover {

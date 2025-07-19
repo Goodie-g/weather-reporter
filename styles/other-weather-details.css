@@ -30,10 +30,14 @@
     .other-weather-details {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        
 
         margin-top: 1rem;
+        padding: 1rem;
 
         width: 14rem;
+        background-color: rgb(238, 238, 248);
+        border-radius: 14px;
 
         font-size: .9rem;
 

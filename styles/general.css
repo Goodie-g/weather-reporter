@@ -26,8 +26,9 @@
         justify-content: space-between;
         align-items: center;
 
-        background-color: #A7D8DE;
-        border-radius: 5%;
+        background-color: rgb(238, 238, 248);
+        border-top-left-radius: 14px;
+        border-top-right-radius: 14px;
 
         height: 4rem;
     }
@@ -55,15 +56,6 @@ body {
 main {
     width: 85%;
     margin: auto;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    background-color: #A7D8DE;
-    border-radius: 10px;
 }
 
 .pad-2 {
