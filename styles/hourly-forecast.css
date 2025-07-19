@@ -11,7 +11,44 @@
 
 /* tablet */
 @media(min-width: 768px) {
+    .hourly-forecast-container {
+        background-color: #A7D8DE;
+
+        padding: 1rem;
+
+        max-width: 26.5rem;
+        min-width: 13.25rem;
     
+    }
+
+    .hourly-forecast {
+        display: flex;
+        overflow-x: auto;
+
+        max-width: inherit;
+        min-width: inherit;
+        scrollbar-color: transparent transparent; 
+    }
+
+    .hourly-forecast::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .hour-forecast {
+        display: flex;
+        flex-direction: column;
+        width: 8rem;
+        padding: 0.5rem;
+
+        margin: 0.2rem 0.4rem;
+
+        font-size: .9rem;
+        border: solid;
+    }
+
+    .condition-in-hour-of-the-day {
+        width: 3rem;
+    }
 }
 
 /* phones */
@@ -19,41 +56,3 @@
     
 }
 
-.hourly-forecast-container {
-    background-color: #A7D8DE;
-
-    padding: 1rem;
-
-    max-width: 26.5rem;
-    min-width: 13.25rem;
-    
-}
-
-.hourly-forecast {
-    display: flex;
-    overflow-x: auto;
-
-    max-width: inherit;
-    min-width: inherit;
-    scrollbar-color: transparent transparent; 
-}
-
-.hourly-forecast::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.hour-forecast {
-    display: flex;
-    flex-direction: column;
-    width: 8rem;
-    padding: 0.5rem;
-
-    margin: 0.2rem 0.4rem;
-
-    font-size: 1rem;
-    border: solid;
-}
-
-.condition-in-hour-of-the-day {
-    width: 3rem;
-}

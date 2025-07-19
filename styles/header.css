@@ -39,6 +39,38 @@
         font-size: 1rem;
     }
 
+    .search {
+        display: flex;
+        align-items: center;
+
+        position: relative;
+        left: -1.5rem;
+    }
+
+    .search-input {
+        height: 3rem;
+
+        border: none;
+        border-radius: 10px;
+
+        padding-left: 1rem;
+        margin-right: .5rem;
+    }
+
+    .search-button {
+        height: 3rem;
+        min-width: 3rem;
+        
+        border: none;
+        border-radius: 10px;
+
+        background-color: #6FB6E7;
+    }
+
+    .search-button-icon {
+        color: rgb(240, 239, 239);
+    }
+
     .settings-icon {
         max-width: 1.7rem;
         transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);

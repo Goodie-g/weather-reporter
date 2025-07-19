@@ -11,7 +11,9 @@
 
 /* tablet */
 @media(min-width: 768px) {
-    
+    .day-forecast {
+        font-size: .9rem;
+    }
 }
 
 /* phones */
