@@ -4,8 +4,8 @@
 
     padding: 1rem;
 
-    max-width: 26.5rem;
-    min-width: 13.25rem;
+    /* max-width: 26.5rem;
+    min-width: 13.25rem; */
 
     border-bottom-right-radius: 14px;
 
@@ -15,8 +15,8 @@
     display: flex;
     overflow-x: auto;
 
-    max-width: inherit;
-    min-width: inherit;
+    /* max-width: inherit;
+    min-width: inherit; */
     scrollbar-color: transparent transparent; 
 
     position: relative;
@@ -45,30 +45,32 @@
     border-radius: 14px;
 }
 
-.condition-in-hour-of-the-day {
+/* .condition-in-hour-of-the-day {
     width: 3rem;
-}
+} */
 
 /* tablet */
 @media(min-width: 768px) {
     .hourly-forecast-container {
         background-color: rgb(238, 238, 248);
 
-        padding: 1rem;
+        padding: 1rem .35rem;
 
-        max-width: 26.5rem;
-        min-width: 13.25rem;
-
+        width: 26.5rem;
         border-bottom-right-radius: 14px;
     
+    }
+
+    .hourly-forecast-heading {
+        color: #6FB6E7;
     }
 
     .hourly-forecast {
         display: flex;
         overflow-x: auto;
 
-        /* max-width: inherit;
-        min-width: inherit; */
+        width: 26.5rem;
+
         scrollbar-color: transparent transparent; 
 
         position: relative;
@@ -82,8 +84,7 @@
     .hour-forecast {
         display: flex;
         flex-direction: column;
-        width: 8rem;
-        height: 8rem;
+        height: 6rem;
         background-color: #6FB6E7;
 
         padding: 0.5rem;
@@ -98,7 +99,7 @@
     }
 
     .condition-in-hour-of-the-day {
-        /* width: 3rem; */
+        width: 4rem;
     }
 }
 

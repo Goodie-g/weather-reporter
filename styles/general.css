@@ -1,12 +1,25 @@
-/* large desktop */
-@media (min-width: 1440px) {
-    
+/* phones */
+body {
+    font-family: 'poppins', sans-serif;
+    background-color: #6FB6E7;
 }
 
+main {
+    width: 85%;
+    margin: auto;
+}
 
-/* laptop */
-@media(min-width: 1024px) {
-    
+.pad-2 {
+    padding: 0 0.5rem;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+}
+
+.loading {
+    color: rgb(238, 238, 248);
 }
 
 /* tablet */
@@ -43,26 +56,18 @@
     }
 }
 
-/* phones */
-@media(min-width: 480px) {
+/* laptop */
+@media(min-width: 1024px) {
     
 }
 
-body {
-    font-family: 'poppins', sans-serif;
-    background-color: #6FB6E7;
+/* large desktop */
+@media (min-width: 1440px) {
+    
 }
 
-main {
-    width: 85%;
-    margin: auto;
-}
 
-.pad-2 {
-    padding: 0 0.5rem;
-}
 
-.weather-details {
-    display: grid;
-    grid-template-columns: 15rem 1fr;
-}
+
+
+

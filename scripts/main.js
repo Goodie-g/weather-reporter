@@ -28,7 +28,6 @@ function displayWeatherData(weatherData) {
     };
 
     const currentWeather = weatherData.current;
-    console.log(currentWeather);
 
     document.querySelector('.js-weather-details')
         .innerHTML = `
@@ -44,17 +43,26 @@ function displayWeatherData(weatherData) {
 
 
         <section class="hourly-forecast-container">
-            <h3>Today</h3>
+            <h3 class="hourly-forecast-heading">Today</h3>
             <section class="hourly-forecast js-hourly-forecast"></section>
         </section>
 
         <section class="other-weather-details"> 
-            <div>Humidity: ${currentWeather.humidity}mm</div>
-            <div>Wind:${currentWeather.wind_kph}kph (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
-            <div>Precipitation: ${currentWeather.precip_mm}</div>
-            <div>Pressure: ${currentWeather.pressure_mb}</div>
-            <div>UV: ${currentWeather.uv}</div>
-            <div>Visibilty: ${currentWeather.vis_km}</div>
+            <h3 class="other-predictions-heading">Other predictions</h3>
+            <section class="weather-predictions">
+                <div class="weather-detail">Humidity: 
+                ${currentWeather.humidity}mm</div>
+                <div class="weather-detail">Wind:${currentWeather.wind_kph}kph 
+                (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
+                <div class="weather-detail">Precipitation:<br> 
+                ${currentWeather.precip_mm}</div>
+                <div class="weather-detail">Pressure: <br>
+                ${currentWeather.pressure_mb}</div>
+                <div class="weather-detail">UV: <br>
+                ${currentWeather.uv}</div>
+                <div class="weather-detail">Visibilty: <br> 
+                ${currentWeather.vis_km}</div>
+            </section>
         </section>
 
 
@@ -90,7 +98,7 @@ searchButton.addEventListener('click', () => {
 });
 
 document.querySelector('.js-weather-details')
-    .innerHTML = 'Loading...'
+    .innerHTML = '<p class="loading">Loading...</p>'
 
 if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {

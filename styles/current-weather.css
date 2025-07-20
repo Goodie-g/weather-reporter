@@ -1,38 +1,35 @@
-/* large desktop */
-@media (min-width: 1440px) {
-   .current-weather {
-      background-color: rgb(235, 233, 233);
-      width: 15rem;
+/* phones */
+.current-weather {
+   background-color: rgb(238, 238, 248);
+   width: 15rem;
+   padding: 1rem;
+   border-bottom-left-radius: 14px;
 
-      padding: 1rem;
-
-      display: grid;
-      grid-template-columns: 9rem 1fr;
-   }
-
-   .location {
-      font-size: 1rem;
-      color: #6FB6E7;
-   }
+   color: #6FB6E7;
 }
 
+.arrange-content {
+   position: relative;
+   top: 18px;
+   left: 2px;
+}
 
-/* laptop */
-@media(min-width: 1024px) {
-   .current-weather {
-      background-color: #A7D8DE;
-      width: 15rem;
+.location {
+   font-size: .9rem;
+   color: #6FB6E7;
+}
 
-      padding: 1rem;
+.current-temp {
+   font-size: 2rem;
+   position: relative;
+   top: -10px;
+}
 
-      display: grid;
-      grid-template-columns: 9rem 1fr;
-   }
-
-   .location {
-      font-size: 1rem;
-      color: #6FB6E7;
-   }
+.feels-like,
+.condition {
+   font-size: 0.9rem;
+   position: relative;
+   top: -10px;
 }
 
 /* tablet */
@@ -71,8 +68,38 @@
    }
 }
 
-/* phones */
-@media(min-width: 480px) {
-    
+/* laptop */
+@media(min-width: 1024px) {
+   .current-weather {
+      background-color: #A7D8DE;
+      width: 15rem;
+
+      padding: 1rem;
+
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+   }
+
+   .location {
+      font-size: 1rem;
+      color: #6FB6E7;
+   }
 }
 
+/* large desktop */
+@media (min-width: 1440px) {
+   .current-weather {
+      background-color: rgb(235, 233, 233);
+      width: 15rem;
+
+      padding: 1rem;
+
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+   }
+
+   .location {
+      font-size: 1rem;
+      color: #6FB6E7;
+   }
+}

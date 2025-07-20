@@ -5,6 +5,7 @@
 
 .days-forecast-heading {
     margin: 1rem 0 0.5rem 0;
+    color: #6FB6E7;
 }
 
 .day-forecast {
@@ -29,26 +30,27 @@
         background-color: rgb(238, 238, 248);
     }
 
-    .ten-day-forecast {
-        display: flex;
+    .days-forecast-heading {
+        margin: 0 0 0.5rem 0;
+        color: #6FB6E7;
     }
 
-    .days-forecast-heading {
-        margin: 0;
+    .ten-day-forecast {
+        display: flex;
     }
 
     .day-forecast {
         display: flex;
         flex-direction: column;
+        background-color: #6FB6E7;
 
         margin: 0 1rem;
-    }
+        padding: .5rem;
+        border-radius: 14px;
 
-    .day-forecast {
         font-size: .9rem;
-    }
-
-    
+        color: rgb(238, 238, 248);
+    }  
 }
 
 /* laptop */

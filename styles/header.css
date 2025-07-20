@@ -44,6 +44,10 @@
         margin-right: .5rem;
     }
 
+    .search-input:focus {
+        outline: 2px solid #FFC72C;
+    }
+
     .search-button {
         height: 2.5rem;
         width: 2.55rem;
