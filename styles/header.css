@@ -1,6 +1,6 @@
 /* phones */
 .heading {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #6FB6E7;
 
     margin: 0;
@@ -19,7 +19,7 @@
 }
 
 .search-input {
-    height: 2.5rem;
+    height: 2rem;
 
     border: none;
     border-radius: 10px;
@@ -33,8 +33,7 @@
 }
 
 .search-button {
-    height: 2.5rem;
-    width: 2.55rem;
+    padding: 1rem;
     
     border: none;
     border-radius: 10px;
@@ -187,7 +186,7 @@
         color: #6FB6E7;
     }
 
-    .settings-icon.spin {
+    .settings-icon:hover {
         transform: rotate(20deg);
     }
 }

@@ -54,14 +54,14 @@ function displayWeatherData(weatherData) {
                 ${currentWeather.humidity}mm</div>
                 <div class="weather-detail">Wind:${currentWeather.wind_kph}kph 
                 (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
-                <div class="weather-detail">Precipitation:<br> 
-                ${currentWeather.precip_mm}</div>
+                <div class="weather-detail">Visibilty: <br> 
+                ${currentWeather.vis_km}</div>
                 <div class="weather-detail">Pressure: <br>
                 ${currentWeather.pressure_mb}</div>
                 <div class="weather-detail">UV: <br>
                 ${currentWeather.uv}</div>
-                <div class="weather-detail">Visibilty: <br> 
-                ${currentWeather.vis_km}</div>
+                <div class="weather-detail">Precipitation:<br> 
+                ${currentWeather.precip_mm}</div>
             </section>
         </section>
 
