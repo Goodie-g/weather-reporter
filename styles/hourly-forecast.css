@@ -2,7 +2,7 @@
 .hourly-forecast-container {
     background-color: rgb(238, 238, 248);
 
-    /* width: 100%; */
+    width: 80%;
     padding: 1rem .35rem;
     border-bottom-right-radius: 14px;
 
@@ -50,8 +50,7 @@
         padding: 1rem .35rem;
         border-bottom-right-radius: 14px;
 
-        overflow-x: auto;
-    
+        width: 97.5%;
     }
 
     .hourly-forecast-heading {
@@ -65,6 +64,8 @@
 
         position: relative;
         right: 6px;
+
+        overflow-x: auto;
     }
 
     .hourly-forecast::-webkit-scrollbar-track {
