@@ -33,7 +33,7 @@
 }
 
 .search-button {
-    padding: 1rem;
+    padding: .45rem;
     
     border: none;
     border-radius: 10px;
@@ -97,9 +97,6 @@
     }
 
     .search-button {
-        height: 2.5rem;
-        width: 2.55rem;
-        
         border: none;
         border-radius: 10px;
 

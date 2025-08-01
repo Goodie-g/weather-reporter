@@ -1,9 +1,6 @@
 /* phones */
 .ten-day-forecast-container {
-    /* position: relative; */
-    /* left: 42px; */
-
-    /* width: 22.6rem; */
+    
     
     border-radius: 14px;
     padding: 1rem;
@@ -42,11 +39,8 @@
 
         width: 82.7%;
         
-        border-radius: 14px;
         padding: 1rem;
-        margin-top: 1rem;
-        
-        background-color: rgb(238, 238, 248);
+        margin-top: 1rem;        
     }
 
     .days-forecast-heading {

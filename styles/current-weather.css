@@ -34,11 +34,7 @@
 /* tablet */
 @media(min-width: 768px) {
    .current-weather {
-      background-color: rgb(238, 238, 248);
-
       padding: 1rem;
-
-      border-bottom-left-radius: 14px;
    }
 
    .arrange-content {

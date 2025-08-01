@@ -45,11 +45,7 @@
 /* tablet */
 @media(min-width: 768px) {
     .hourly-forecast-container {
-        background-color: rgb(238, 238, 248);
-
         padding: 1rem .35rem;
-        border-bottom-right-radius: 14px;
-
         width: 97.5%;
     }
 

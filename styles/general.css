@@ -27,10 +27,7 @@ header {
     padding: 0 0.5rem;
 }
 
-.weather-details {
-    /* display: grid;
-    grid-template-columns: 15rem 1fr; */
-}
+
 
 .loading {
     color: rgb(238, 238, 248);
@@ -46,6 +43,9 @@ header {
     main {
         width: 85%;
         margin: auto;
+        border-radius: 14px;
+
+        background-color: rgb(238, 238, 248);
     }
 
     header {
@@ -53,9 +53,7 @@ header {
         justify-content: space-between;
         align-items: center;
 
-        background-color: rgb(238, 238, 248);
-        border-top-left-radius: 14px;
-        border-top-right-radius: 14px;
+        
 
         padding: .8rem;
 
@@ -70,9 +68,3 @@ header {
         grid-template-columns: 15rem 1fr;
     }
 }
-
-
-
-
-
-
