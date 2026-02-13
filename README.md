@@ -3,7 +3,7 @@
 ## Description
 This is a weather forecast app built to show current and upcoming weather conditions.
 
-## Description
+## Motivation
 This was built in an attempt to understand how weather forecast apps work and as well as provide me with a better understanding of several JS concepts like, the DOM, API's etc.
 
 ## Quick Start
