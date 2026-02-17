@@ -1,6 +1,6 @@
-import { apiKey } from "./apiKey.js";
+import { apiKey } from "./utils/apiKey.js";
 import dayjs from 'https://cdn.skypack.dev/dayjs';
-import './settings-icon-spin.js';
+import './utils/settings-icon-spin.js';
 
 async function getWeather(location) {
     try { 
@@ -105,12 +105,15 @@ if ("geolocation" in navigator) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
+        document.querySelector('.js-weather-details').innerHTML = '<p class="loading">Loading...</p>'
+
         getWeather(`${latitude}, ${longitude}`).then((weatherData) => {
             displayWeatherData(weatherData);
             displayHourlyForecast(weatherData);
             displayTenDayForecast(weatherData);
             
         });
+        
     },
     (error) => {
         let errorMessage;

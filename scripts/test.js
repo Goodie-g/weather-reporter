@@ -1,4 +1,4 @@
-import { apiKey } from "./apiKey.js";
+import { apiKey } from "./utils/apiKey.js";
 
 const searchElement = document.querySelector('.js-search');
 console.log(typeof searchElement.input)
