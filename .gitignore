@@ -1,4 +1,4 @@
-scripts/apiKey.js
+scripts/utils/apiKey.js
 test.html
 scripts/test.js
 styles/test.css

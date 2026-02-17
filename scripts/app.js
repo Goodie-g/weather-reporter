@@ -1,25 +1,15 @@
-import { apiKey } from "./utils/apiKey.js";
-import dayjs from 'https://cdn.skypack.dev/dayjs';
 import './utils/settings-icon-spin.js';
+import { getWeatherData } from './utils/fetch-instance.js';
+import { displayCurrentWeatherData } from './pages/main page/current-weather-details.js';
+import { displayHourlyForecast } from './pages/main page/hourly-forecast.js';
+import { displayOtherWeatherDetails } from './pages/main page/other-weather-details.js';
+import { displayTenDayForecast } from './pages/main page/3-day-forecast.js';
 
-async function getWeather(location) {
-    try { 
-        if (!location) {
-            throw new Error("location is required.");
-        }
-        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&aqi=no&days=3`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-       
-        const weatherData = await response.json();
-        if (weatherData.error) {
-            throw new Error(weatherData.error.message)
-        }
-        console.log(weatherData)
-        return weatherData;
-    } catch(error) {
-        console.log('Error:', error.message);
-    }
+async function renderWeatherdata() {
+
 }
+
+
 
 function displayWeatherData(weatherData) {
     const tempUnits = {
@@ -47,23 +37,7 @@ function displayWeatherData(weatherData) {
             <section class="hourly-forecast js-hourly-forecast"></section>
         </section>
 
-        <section class="other-weather-details"> 
-            <h3 class="other-predictions-heading">Other predictions</h3>
-            <section class="weather-predictions">
-                <div class="weather-detail">Humidity: 
-                ${currentWeather.humidity}mm</div>
-                <div class="weather-detail">Wind:${currentWeather.wind_kph}kph 
-                (${currentWeather.wind_degree}\u00B0 ${currentWeather.wind_dir})</div>
-                <div class="weather-detail">Visibilty: <br> 
-                ${currentWeather.vis_km}</div>
-                <div class="weather-detail">Pressure: <br>
-                ${currentWeather.pressure_mb}</div>
-                <div class="weather-detail">UV: <br>
-                ${currentWeather.uv}</div>
-                <div class="weather-detail">Precipitation:<br> 
-                ${currentWeather.precip_mm}</div>
-            </section>
-        </section>
+        
 
 
         <section class="ten-day-forecast-container">
@@ -145,34 +119,7 @@ if ("geolocation" in navigator) {
   alert("Geolocation is not supported by your browser.");
 }
 
-function displayHourlyForecast(weatherData) {
-    const weatherForecast = weatherData.forecast.forecastday;
-    const [firstDay] = weatherForecast;
-    firstDay.hour.map(hourOfTheDay => {
-        document.querySelector('.js-hourly-forecast')
-            .innerHTML += `
-            <div class="hour-forecast">
-                <div>${dayjs(hourOfTheDay.time).format('hh a')}</div>
-                <div>${Math.round(hourOfTheDay.temp_c)}\u00B0 C</div>
-                <div class="condition-in-hour-of-the-day"> ${hourOfTheDay.condition.text}</div>
-            </div>
-            `;
-    }).join('');
-        
-}
 
-function displayTenDayForecast(weatherData) {
-    const weatherForecast = weatherData.forecast.forecastday;
-    weatherForecast.map(day => {
-        document.querySelector('.js-ten-day-forecast')
-            .innerHTML += `
-            <section class="day-forecast">
-                <div>${dayjs(day.date).format('ddd')}</div>
-                <div>Hi: ${Math.round(day.day.maxtemp_c)} </div>
-                <img src="${day.day.condition.icon}">
-                <div>Lo: ${Math.round(day.day.mintemp_c)}</div>
-            </section>
-            `;
-    }).join('');
-}
+
+
 
