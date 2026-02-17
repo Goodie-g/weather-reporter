@@ -1,50 +1,37 @@
 import './utils/settings-icon-spin.js';
 import { getWeatherData } from './utils/fetch-instance.js';
-import { displayCurrentWeatherData } from './pages/main page/current-weather-details.js';
+import { displayCurrentWeatherData } from './pages/main page/current-weather-data.js';
 import { displayHourlyForecast } from './pages/main page/hourly-forecast.js';
 import { displayOtherWeatherDetails } from './pages/main page/other-weather-details.js';
 import { displayTenDayForecast } from './pages/main page/3-day-forecast.js';
 
-async function renderWeatherdata() {
+export const tempUnits = {
+    C: 'C',
+    F: 'F'
+};
 
-}
+const weatherDetailsSection = document.querySelector('.js-weather-details')
 
+async function renderWeatherdata(location) {
+    
+    const weatherData = await getWeatherData(location);
 
-
-function displayWeatherData(weatherData) {
-    const tempUnits = {
-        C: 'C',
-        F: 'F'
-    };
-
-    const currentWeather = weatherData.current;
-
-    document.querySelector('.js-weather-details')
-        .innerHTML = `
-        <section class="current-weather">
-            <section class="arrange-content">
-                <div class="location">${weatherData.location.name}, ${weatherData.location.country}</div>
-                <img src="${currentWeather.condition.icon}">
-                <div class="current-temp">${Math.round(currentWeather.temp_c)}\u00B0 ${tempUnits.C}</div>
-                <div class="feels-like">Feels like ${Math.round(currentWeather.feelslike_c)}\u00B0 ${tempUnits.C}</div>
-                <div class="condition"> ${currentWeather.condition.text}</div>
-            </section>
-        </section>
-
+    weatherDetailsSection.innerHTML = `
+        ${displayCurrentWeatherData(weatherData)}
 
         <section class="hourly-forecast-container">
             <h3 class="hourly-forecast-heading">Today</h3>
-            <section class="hourly-forecast js-hourly-forecast"></section>
+            <section class="hourly-forecast js-hourly-forecast">${displayHourlyForecast(weatherData)}</section>
         </section>
 
-        
-
+        ${displayOtherWeatherDetails(weatherData)}
 
         <section class="ten-day-forecast-container">
             <h3 class="days-forecast-heading">3 day forecast</h3>
-            <section class="ten-day-forecast js-ten-day-forecast"></section>
+            <section class="ten-day-forecast js-ten-day-forecast">${displayTenDayForecast(weatherData)}</section>
         </section>
-        `;
+    `;
+
 }
 
 const searchButton = document.querySelector('.js-search-button');
@@ -72,8 +59,9 @@ searchButton.addEventListener('click', () => {
 });
 
 document.querySelector('.js-weather-details')
-    .innerHTML = '<p class="loading">Loading...</p>'
+    .innerHTML = '<p class="loading">Loading...</p>';
 
+// current location estimation and initial render
 if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude;
@@ -81,12 +69,7 @@ if ("geolocation" in navigator) {
 
         document.querySelector('.js-weather-details').innerHTML = '<p class="loading">Loading...</p>'
 
-        getWeather(`${latitude}, ${longitude}`).then((weatherData) => {
-            displayWeatherData(weatherData);
-            displayHourlyForecast(weatherData);
-            displayTenDayForecast(weatherData);
-            
-        });
+        renderWeatherdata(`${latitude}, ${longitude}`);
         
     },
     (error) => {

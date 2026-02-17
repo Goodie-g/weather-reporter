@@ -1,4 +1,4 @@
-import { apiKey } from "./utils/apiKey.js";
+import { apiKey } from "./apiKey.js";
 
 export async function getWeatherData(location) {
     try { 
@@ -12,10 +12,10 @@ export async function getWeatherData(location) {
         if (weatherData.error) {
             throw new Error(weatherData.error.message)
         }
-       
+        console.log(weatherData)
         return weatherData;
+
     } catch(error) {
         console.log('Error:', error.message);
     }
 }
-
