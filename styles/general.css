@@ -5,11 +5,11 @@ body {
 }
 
 main {
+    margin-inline: auto;
+    width: min(100%, 900px);
 
-    width: 10%;
-    /* margin: auto; */
+    background-color: rgb(238, 238, 248);
 
-    display: grid;
 }
 
 header {
