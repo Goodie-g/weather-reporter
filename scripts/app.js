@@ -40,7 +40,6 @@ const searchInput = document.querySelector('.js-search-input');
 searchInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const location = searchInput.value.trim();
-        console.log(typeof location)
         getWeatherData(location).then((weatherData) => {
             renderWeatherdata(weatherData)
         });

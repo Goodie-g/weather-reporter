@@ -18,10 +18,6 @@
     scrollbar-color: transparent transparent;   
 }
 
-.hourly-forecast::-webkit-scrollbar-track {
-    background: transparent;
-}
-
 .hour-forecast {
     display: flex;
     flex-direction: column;
@@ -37,6 +33,10 @@
     border-color: #6FB6E7;
     border-radius: 14px;
 }
+
+.condition-in-hour-of-the-day {
+        width: 4rem;
+    }
 
 /* tablet */
 @media(min-width: 768px) {
@@ -78,9 +78,5 @@
         border: solid;
         border-color: #6FB6E7;
         border-radius: 14px;
-    }
-
-    .condition-in-hour-of-the-day {
-        width: 4rem;
     }
 }
