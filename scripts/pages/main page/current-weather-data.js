@@ -1,7 +1,6 @@
 import { tempUnits } from "../../app.js";
 
 export function displayCurrentWeatherData(weatherData) {
-    console.log(weatherData)
     const currentWeatherData = weatherData.current;
     return `
         <section class="current-weather">
