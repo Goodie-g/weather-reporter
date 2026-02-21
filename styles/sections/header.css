@@ -2,12 +2,6 @@
 .heading {
     font-size: 1rem;
     color: #6FB6E7;
-
-    margin: 0;
-
-    position: relative;
-    top: 1px;
-    left: 6px;
 }
 
 .search {

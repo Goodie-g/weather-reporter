@@ -40,10 +40,9 @@ const searchInput = document.querySelector('.js-search-input');
 searchInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const location = searchInput.value.trim();
-        getWeather(location).then((weatherData) => {
-            displayWeatherData(weatherData);
-            displayHourlyForecast(weatherData);
-            displayTenDayForecast(weatherData);
+        console.log(typeof location)
+        getWeatherData(location).then((weatherData) => {
+            renderWeatherdata(weatherData)
         });
         searchInput.value = '';
     }
@@ -51,10 +50,8 @@ searchInput.addEventListener('keydown', (event) => {
 
 searchButton.addEventListener('click', () => {
     const location = searchInput.value.trim();
-    getWeather(location).then((weatherData) => {
-        displayWeatherData(weatherData);
-        displayHourlyForecast(weatherData);
-        displayTenDayForecast(weatherData);
+    getWeatherData(location).then((weatherData) => {
+        renderWeatherdata(weatherData)
     });
 });
 
