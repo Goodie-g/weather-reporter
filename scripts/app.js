@@ -40,18 +40,14 @@ const searchInput = document.querySelector('.js-search-input');
 searchInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const location = searchInput.value.trim();
-        getWeatherData(location).then((weatherData) => {
-            renderWeatherdata(weatherData)
-        });
+        renderWeatherdata(location)
         searchInput.value = '';
     }
 });
 
 searchButton.addEventListener('click', () => {
     const location = searchInput.value.trim();
-    getWeatherData(location).then((weatherData) => {
-        renderWeatherdata(weatherData)
-    });
+    renderWeatherdata(location)
 });
 
 document.querySelector('.js-weather-details')
@@ -97,8 +93,3 @@ if ("geolocation" in navigator) {
 } else {
   alert("Geolocation is not supported by your browser.");
 }
-
-
-
-
-
