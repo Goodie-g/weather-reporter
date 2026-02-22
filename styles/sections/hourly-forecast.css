@@ -2,7 +2,7 @@
 .hourly-forecast-container {
     background-color: rgb(238, 238, 248);
 
-    width: 90%;
+    max-width: 90%;
     padding: 1rem .35rem;
     border-bottom-right-radius: 14px;  
 }
@@ -42,7 +42,7 @@
 @media(min-width: 768px) {
     .hourly-forecast-container {
         padding: 1rem .35rem;
-        width: 97.5%;
+        max-width: 72%;
     }
 
     .hourly-forecast-heading {
