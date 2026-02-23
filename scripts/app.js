@@ -50,8 +50,8 @@ searchButton.addEventListener('click', () => {
     renderWeatherdata(location)
 });
 
-document.querySelector('.js-weather-details')
-    .innerHTML = '<p class="loading">Loading...</p>';
+// From Uiverse.io by Shoh2008
+        document.querySelector('.js-weather-details').innerHTML = '<div class="loader"></div>';
 
 // current location estimation and initial render
 if ("geolocation" in navigator) {
@@ -59,10 +59,7 @@ if ("geolocation" in navigator) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
-        document.querySelector('.js-weather-details').innerHTML = '<p class="loading">Loading...</p>'
-
-        renderWeatherdata(`${latitude}, ${longitude}`);
-        
+        renderWeatherdata(`${latitude}, ${longitude}`);      
     },
     (error) => {
         let errorMessage;

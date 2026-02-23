@@ -38,7 +38,7 @@
         width: 4rem;
     }
 
-/* tablet */
+/* tablet and above */
 @media(min-width: 768px) {
     .hourly-forecast-container {
         padding: 1rem .35rem;

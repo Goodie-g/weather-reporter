@@ -28,7 +28,7 @@
    top: -10px;
 }
 
-/* tablet */
+/* tablet and above */
 @media(min-width: 768px) {
    .current-weather {
       width: 15%;

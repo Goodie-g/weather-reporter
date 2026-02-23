@@ -29,12 +29,8 @@ header {
     padding: 0 0.5rem;
 }
 
-.loading {
-    color: #6FB6E7;
-    margin: 2rem;
-}
 
-/* tablet */
+/* tablet and above */
 @media(min-width: 768px) {
     body {
         font-family: 'poppins', sans-serif;
@@ -55,10 +51,7 @@ header {
         justify-content: space-between;
         align-items: center;
 
-        
-
         padding: .8rem;
-
     }
 
     .pad-2 {
