@@ -8,6 +8,7 @@ main {
     margin-inline: auto;
     width: min(100%, 900px);
     border-radius: 14px;
+    padding-left: .5rem;
 
     background-color: rgb(238, 238, 248);
 
@@ -28,8 +29,6 @@ header {
     padding: 0 0.5rem;
 }
 
-
-
 .loading {
     color: #6FB6E7;
     margin: 2rem;
@@ -46,6 +45,7 @@ header {
         width: 85%;
         margin: auto;
         border-radius: 14px;
+        padding-left: .5rem;
 
         background-color: rgb(238, 238, 248);
     }

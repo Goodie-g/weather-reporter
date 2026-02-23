@@ -31,6 +31,7 @@
 /* tablet */
 @media(min-width: 768px) {
    .current-weather {
+      width: 15%;
       padding: 1rem;
    }
 
@@ -59,74 +60,3 @@
    }
 }
 
-/* laptop */
-@media(min-width: 1024px) {
-   .current-weather {
-      background-color: rgb(238, 238, 248);
-      width: 15rem;
-
-      padding: 1rem;
-
-      border-bottom-left-radius: 14px;
-   }
-
-   .arrange-content {
-      position: relative;
-      top: 18px;
-      left: 2px;
-   }
-
-   .location {
-      font-size: .9rem;
-      color: #6FB6E7;
-   }
-
-   .current-temp {
-      font-size: 2rem;
-      position: relative;
-      top: -10px;
-   }
-
-   .feels-like,
-   .condition {
-      font-size: 0.9rem;
-      position: relative;
-      top: -10px;
-   }
-}
-
-/* large desktop */
-@media (min-width: 1440px) {
-   .current-weather {
-      background-color: rgb(238, 238, 248);
-      width: 15rem;
-
-      padding: 1rem;
-
-      border-bottom-left-radius: 14px;
-   }
-
-   .arrange-content {
-      position: relative;
-      top: 18px;
-      left: 2px;
-   }
-
-   .location {
-      font-size: .9rem;
-      color: #6FB6E7;
-   }
-
-   .current-temp {
-      font-size: 2rem;
-      position: relative;
-      top: -10px;
-   }
-
-   .feels-like,
-   .condition {
-      font-size: 0.9rem;
-      position: relative;
-      top: -10px;
-   }
-}
