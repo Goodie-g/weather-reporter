@@ -33,7 +33,6 @@
 @media(min-width: 768px) {
     .ten-day-forecast-container {
         position: relative;
-        left: 42px;
         
         padding: 1rem;
         margin-top: 1rem;        
