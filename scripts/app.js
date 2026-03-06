@@ -40,18 +40,20 @@ const searchInput = document.querySelector('.js-search-input');
 searchInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const location = searchInput.value.trim();
-        renderWeatherdata(location)
+        renderWeatherdata(location);
         searchInput.value = '';
     }
+    searchInput.value = '';
 });
 
 searchButton.addEventListener('click', () => {
     const location = searchInput.value.trim();
-    renderWeatherdata(location)
+    renderWeatherdata(location);
+    searchInput.value = '';
+
 });
 
-// From Uiverse.io by Shoh2008
-        document.querySelector('.js-weather-details').innerHTML = '<div class="loader"></div>';
+
 
 // current location estimation and initial render
 if ("geolocation" in navigator) {
@@ -59,7 +61,12 @@ if ("geolocation" in navigator) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
-        renderWeatherdata(`${latitude}, ${longitude}`);      
+        // From Uiverse.io by Shoh2008
+
+        document.querySelector('.js-weather-details').innerHTML = '<div class="loader"></div>'
+
+        renderWeatherdata(`${latitude}, ${longitude}`);
+        
     },
     (error) => {
         let errorMessage;
