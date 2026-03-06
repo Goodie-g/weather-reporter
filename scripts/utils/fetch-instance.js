@@ -10,7 +10,7 @@ export async function getWeatherData(location) {
        
         const weatherData = await response.json();
         if (weatherData.error) {
-            throw new Error(weatherData.error.message)
+            throw new Error(weatherData.error.message);
         }
         return weatherData;
 

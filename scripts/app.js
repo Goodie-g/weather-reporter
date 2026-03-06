@@ -43,14 +43,13 @@ searchInput.addEventListener('keydown', (event) => {
         renderWeatherdata(location);
         searchInput.value = '';
     }
-    searchInput.value = '';
+    
 });
 
 searchButton.addEventListener('click', () => {
     const location = searchInput.value.trim();
     renderWeatherdata(location);
     searchInput.value = '';
-
 });
 
 
