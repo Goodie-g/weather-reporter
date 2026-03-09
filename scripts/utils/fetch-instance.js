@@ -1,4 +1,6 @@
 import { apiKey } from "./apiKey.js";
+import { showErrorMessage} from './utils/show-error-message.js';
+
 
 export async function getWeatherData(location) {
     try { 
@@ -9,12 +11,15 @@ export async function getWeatherData(location) {
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
        
         const weatherData = await response.json();
+        
         if (weatherData.error) {
-            throw new Error(weatherData.error.message);
+            throw error;
         }
         return weatherData;
 
+
     } catch(error) {
-        console.log('Error:', error.message);
+        // showErrorMessage(error.message);
+        console.log(error)
     }
 }

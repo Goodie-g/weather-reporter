@@ -1,5 +1,6 @@
 import './utils/settings-icon-spin.js';
 import { getWeatherData } from './utils/fetch-instance.js';
+import { showErrorMessage } from './utils/show-error-message.js';
 import { displayCurrentWeatherData } from './pages/main page/current-weather-data.js';
 import { displayHourlyForecast } from './pages/main page/hourly-forecast.js';
 import { displayOtherWeatherDetails } from './pages/main page/other-weather-details.js';
@@ -13,24 +14,27 @@ export const tempUnits = {
 const weatherDetailsSection = document.querySelector('.js-weather-details')
 
 async function renderWeatherdata(location) {
-    
-    const weatherData = await getWeatherData(location);
+    try {
+        const weatherData = await getWeatherData(location);
 
-    weatherDetailsSection.innerHTML = `
-        ${displayCurrentWeatherData(weatherData)}
+        weatherDetailsSection.innerHTML = `
+            ${displayCurrentWeatherData(weatherData)}
 
-        <section class="hourly-forecast-container">
-            <h3 class="hourly-forecast-heading">Today</h3>
-            <section class="hourly-forecast js-hourly-forecast">${displayHourlyForecast(weatherData)}</section>
-        </section>
+            <section class="hourly-forecast-container">
+                <h3 class="hourly-forecast-heading">Today</h3>
+                <section class="hourly-forecast js-hourly-forecast">${displayHourlyForecast(weatherData)}</section>
+            </section>
 
-        ${displayOtherWeatherDetails(weatherData)}
+            ${displayOtherWeatherDetails(weatherData)}
 
-        <section class="ten-day-forecast-container">
-            <h3 class="days-forecast-heading">3 day forecast</h3>
-            <section class="ten-day-forecast js-ten-day-forecast">${displayTenDayForecast(weatherData)}</section>
-        </section>
-    `;
+            <section class="ten-day-forecast-container">
+                <h3 class="days-forecast-heading">3 day forecast</h3>
+                <section class="ten-day-forecast js-ten-day-forecast">${displayTenDayForecast(weatherData)}</section>
+            </section>
+        `;
+    } catch (error) {
+        showErrorMessage(error.message);
+    }
 
 }
 
