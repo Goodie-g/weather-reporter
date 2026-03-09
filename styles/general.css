@@ -62,4 +62,40 @@ header {
         display: flex;
         flex-wrap: wrap;
     }
+
+    .error-message {
+        color: #d32f2f;
+        background-color: #ffebee;
+        border: 1px solid #ffcdd2;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        text-align: center;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+
+    .error-message.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .error-close {
+        background: none;
+        border: none;
+        color: #d32f2f;
+        font-size: 1.5rem;
+        cursor: pointer;
+        float: right;
+        margin-left: 0.5rem;
+        line-height: 1;
+    }
+
+    .error-close:hover {
+        color: #b71c1c;
+    }
 }

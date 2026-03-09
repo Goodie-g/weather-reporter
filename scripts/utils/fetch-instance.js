@@ -1,5 +1,5 @@
 import { apiKey } from "./apiKey.js";
-import { showErrorMessage} from './utils/show-error-message.js';
+import { showErrorMessage} from './show-error-message.js';
 
 
 export async function getWeatherData(location) {
