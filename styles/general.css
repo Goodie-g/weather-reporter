@@ -72,6 +72,7 @@ header {
         margin: 1rem 0;
         text-align: center;
         font-weight: 500;
+        display: none;
         opacity: 0;
         transform: translateY(-10px);
         transition: opacity 0.3s ease, transform 0.3s ease;

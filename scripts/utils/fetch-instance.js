@@ -13,13 +13,12 @@ export async function getWeatherData(location) {
         const weatherData = await response.json();
         
         if (weatherData.error) {
-            throw error;
+            throw new Error(weatherData.error.message);
         }
         return weatherData;
 
 
     } catch(error) {
-        // showErrorMessage(error.message);
-        console.log(error)
+        showErrorMessage(error);
     }
 }

@@ -33,7 +33,7 @@ async function renderWeatherdata(location) {
             </section>
         `;
     } catch (error) {
-        showErrorMessage(error.message);
+        showErrorMessage(error);
     }
 
 }
