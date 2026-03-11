@@ -1,7 +1,7 @@
 /* phones */
 .current-weather {
-  justify-self: center;
-   color: #6FB6E7;
+   justify-self: center;
+    color: var(--accent-color, #6FB6E7);
 }
 
 .arrange-content {
@@ -10,9 +10,9 @@
    left: 2px;
 }
 
-.location {
+   .location {
    font-size: .9rem;
-   color: #6FB6E7;
+   color: var(--accent-color, #6FB6E7);
 }
 
 .current-temp {
@@ -36,10 +36,10 @@
    }
 
    .arrange-content {
-      position: relative;
-      top: 18px;
-      left: 2px;
-   }
+   position: relative;
+   top: 18px;
+   left: 2px;
+}
 
    .location {
       font-size: .9rem;

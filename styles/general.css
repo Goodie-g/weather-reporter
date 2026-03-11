@@ -14,12 +14,26 @@ main {
 
 }
 
+/* Dark mode variables */
+:root {
+    --bg-color: #6FB6E7;
+    --card-bg: rgb(238, 238, 248);
+    --text-color: #111827;
+    --accent-color: #6FB6E7;
+}
+
+.dark {
+    --bg-color: #0b1220;
+    --card-bg: #0f1724;
+    --text-color: #e6eef8;
+    --accent-color: var(--text-color);
+}
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    background-color: rgb(238, 238, 248);
     border-top-left-radius: 14px;
     border-top-right-radius: 1rem;
 
@@ -71,7 +85,8 @@ header {
 @media(min-width: 768px) {
     body {
         font-family: 'poppins', sans-serif;
-        background-color: #6FB6E7;
+        background-color: var(--bg-color, #6FB6E7);
+        color: var(--text-color, #111827);
     }
 
     main {
@@ -80,7 +95,7 @@ header {
         border-radius: 14px;
         padding-left: .5rem;
 
-        background-color: rgb(238, 238, 248);
+        background-color: var(--card-bg, rgb(238, 238, 248));
     }
 
     header {

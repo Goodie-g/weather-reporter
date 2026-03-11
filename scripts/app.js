@@ -10,6 +10,8 @@ export let selectedUnit = 'C';
 const UNIT_KEY = 'weatherUnit';
 const LAST_WEATHER_KEY = 'lastWeatherData';
 let lastKnownCoords = null;
+const DARK_MODE_KEY = 'darkMode';
+let darkModeEnabled = false;
 
 function loadSelectedUnit() {
     try {
@@ -19,6 +21,19 @@ function loadSelectedUnit() {
         const locale = (navigator.language || '').toLowerCase();
         return locale === 'en-us' ? 'F' : 'C';
     } catch (e) { return 'C'; }
+}
+
+function loadDarkMode() {
+    try {
+        const v = localStorage.getItem(DARK_MODE_KEY);
+        return v === 'true';
+    } catch (e) { return false; }
+}
+
+function setDarkMode(enabled) {
+    darkModeEnabled = !!enabled;
+    try { localStorage.setItem(DARK_MODE_KEY, darkModeEnabled ? 'true' : 'false'); } catch(e){}
+    if (darkModeEnabled) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');
 }
 
 function setSelectedUnit(unit) {
@@ -41,6 +56,9 @@ const historyContainer = document.querySelector('.js-search-history');
 
 // initialize selected unit early so renders use proper unit
 selectedUnit = loadSelectedUnit();
+// initialize dark mode early
+darkModeEnabled = loadDarkMode();
+if (darkModeEnabled) document.documentElement.classList.add('dark');
 
 // Auto-render last saved weather data on load (if present)
 const _lastSaved = loadLastWeatherData();
@@ -289,6 +307,7 @@ if (!_lastSaved) {
 const settingsIconEl = document.getElementById('settings-icon');
 const settingsDropdown = document.querySelector('.js-settings-dropdown');
 const unitToggle = document.getElementById('js-toggle-units');
+const darkModeToggle = document.getElementById('js-toggle-darkmode');
 
 if (unitToggle) {
     unitToggle.checked = selectedUnit === 'F';
@@ -299,6 +318,13 @@ if (unitToggle) {
         const last = loadLastWeatherData();
         if (last) renderFromSavedWeatherData(last);
         // Keep settings dropdown visible so user can continue changing options
+    });
+}
+
+if (darkModeToggle) {
+    darkModeToggle.checked = darkModeEnabled;
+    darkModeToggle.addEventListener('change', (e) => {
+        setDarkMode(!!e.target.checked);
     });
 }
 

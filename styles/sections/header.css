@@ -18,7 +18,7 @@
     top: 110%;
     left: 0;
     right: 0;
-    background: rgb(238, 238, 248);
+    background: var(--card-bg, rgb(238, 238, 248));
     border: 1px solid rgba(0,0,0,0.06);
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.06);
@@ -67,7 +67,7 @@
     top: 16%;
     right: 0.25rem;
     min-width: 220px;
-    background: rgb(238, 238, 248);
+    background: var(--card-bg, rgb(238, 238, 248));
     border: 1px solid rgba(0,0,0,0.06);
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.06);
