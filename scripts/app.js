@@ -298,11 +298,7 @@ if (unitToggle) {
         // re-render from saved data if available
         const last = loadLastWeatherData();
         if (last) renderFromSavedWeatherData(last);
-        // hide the settings dropdown
-        if (settingsDropdown) {
-            settingsDropdown.classList.remove('show');
-            settingsDropdown.setAttribute('aria-hidden', 'true');
-        }
+        // Keep settings dropdown visible so user can continue changing options
     });
 }
 
