@@ -11,9 +11,46 @@ export const tempUnits = {
     F: 'F'
 };
 
+export let selectedUnit = 'C';
+const UNIT_KEY = 'weatherUnit';
+const LAST_WEATHER_KEY = 'lastWeatherData';
+
+function loadSelectedUnit() {
+    try {
+        const v = localStorage.getItem(UNIT_KEY);
+        if (v === 'F' || v === 'C') return v;
+        // try to infer from browser locale (simple): default to F for en-US
+        const locale = (navigator.language || '').toLowerCase();
+        return locale === 'en-us' ? 'F' : 'C';
+    } catch (e) { return 'C'; }
+}
+
+function setSelectedUnit(unit) {
+    if (unit !== 'C' && unit !== 'F') return;
+    selectedUnit = unit;
+    try { localStorage.setItem(UNIT_KEY, unit); } catch (e) {}
+}
+
+function saveLastWeatherData(data) {
+    try { localStorage.setItem(LAST_WEATHER_KEY, JSON.stringify(data)); } catch (e) { console.error('Failed to save last weather', e); }
+}
+
+function loadLastWeatherData() {
+    try { const raw = localStorage.getItem(LAST_WEATHER_KEY); return raw ? JSON.parse(raw) : null; } catch(e){return null}
+}
+
 const weatherDetailsSection = document.querySelector('.js-weather-details')
 const HISTORY_KEY = 'weatherSearchHistory';
 const historyContainer = document.querySelector('.js-search-history');
+
+// initialize selected unit early so renders use proper unit
+selectedUnit = loadSelectedUnit();
+
+// Auto-render last saved weather data on load (if present)
+const _lastSaved = loadLastWeatherData();
+if (_lastSaved) {
+    renderFromSavedWeatherData(_lastSaved);
+}
 
 function loadHistory() {
     try {
@@ -91,6 +128,8 @@ function renderHistoryDropdown(filter = '') {
 async function renderWeatherdata(location, saveHistory = true) {
     try {
         const weatherData = await getWeatherData(location);
+        // persist last fetched data
+        try { saveLastWeatherData(weatherData); } catch(e){}
         // Save the successful search to history (unless disabled)
         if (saveHistory) {
             try { saveSearch(location); } catch(e) { console.error('saveSearch failed', e); }
@@ -121,8 +160,34 @@ async function renderWeatherdata(location, saveHistory = true) {
 
 }
 
+function renderFromSavedWeatherData(data) {
+    if (!data) return;
+    weatherDetailsSection.innerHTML = `
+        ${displayCurrentWeatherData(data)}
+
+        <section class="hourly-forecast-container">
+            <h3 class="hourly-forecast-heading">Today</h3>
+            <section class="hourly-forecast js-hourly-forecast">${displayHourlyForecast(data)}</section>
+        </section>
+
+        ${displayOtherWeatherDetails(data)}
+
+        <section class="ten-day-forecast-container">
+            <h3 class="days-forecast-heading">3 day forecast</h3>
+            <section class="ten-day-forecast js-ten-day-forecast">${displayTenDayForecast(data)}</section>
+        </section>
+    `;
+}
+
 const searchButton = document.querySelector('.js-search-button');
 const searchInput = document.querySelector('.js-search-input');
+
+// Populate search input with last saved location name if available
+try {
+    if (typeof _lastSaved !== 'undefined' && _lastSaved && searchInput) {
+        const locName = _lastSaved.location && _lastSaved.location.name ? _lastSaved.location.name : '';
+    }
+} catch (e) {}
 
 searchInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
@@ -174,45 +239,99 @@ document.addEventListener('click', (e) => {
 
 
 
-// current location estimation and initial render
-if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition((position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
+// current location estimation and initial render (only if no saved data exists)
+if (!_lastSaved) {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
 
-        // From Uiverse.io by Shoh2008
+            // From Uiverse.io by Shoh2008
 
-        document.querySelector('.js-weather-details').innerHTML = '<div class="loader"></div>'
+            document.querySelector('.js-weather-details').innerHTML = '<div class="loader"></div>'
 
-        renderWeatherdata(`${latitude}, ${longitude}`, false);
-        
-    },
-    (error) => {
-        let errorMessage;
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                errorMessage = "Location access was denied. Please enable location services in your browser or device settings.";
-                break;
-            case error.TIMEOUT:
-                errorMessage = "The request to get user location timed out. Please try again.";
-                break;
-                 
-            case error.UNKNOWN_ERROR:
-            errorMessage = "An unknown error occurred while getting your location.";
-                break;
-            default:
-            errorMessage = "An error occurred while getting your location: " + error.message;
-        }
-        alert(errorMessage);
-        console.error("Geolocation error:", errorMessage);
+            renderWeatherdata(`${latitude}, ${longitude}`, false);
+            
         },
-        {
-        // Optional options: timeout and accuracy
-        timeout: 10000,
-        maximumAge: 0,
-        enableHighAccuracy: true
+        (error) => {
+            let errorMessage;
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMessage = "Location access was denied. Please enable location services in your browser or device settings.";
+                    break;
+                case error.TIMEOUT:
+                    errorMessage = "The request to get user location timed out. Please try again.";
+                    break;
+                     
+                case error.UNKNOWN_ERROR:
+                errorMessage = "An unknown error occurred while getting your location.";
+                    break;
+                default:
+                errorMessage = "An error occurred while getting your location: " + error.message;
+            }
+            alert(errorMessage);
+            console.error("Geolocation error:", errorMessage);
+            },
+            {
+            // Optional options: timeout and accuracy
+            timeout: 10000,
+            maximumAge: 0,
+            enableHighAccuracy: true
+            }
+        );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+    }
+}
+
+// --- Settings dropdown and unit toggle ---
+
+const settingsIconEl = document.getElementById('settings-icon');
+const settingsDropdown = document.querySelector('.js-settings-dropdown');
+const unitToggle = document.getElementById('js-toggle-units');
+
+if (unitToggle) {
+    unitToggle.checked = selectedUnit === 'F';
+    unitToggle.addEventListener('change', (e) => {
+        const newUnit = e.target.checked ? 'F' : 'C';
+        setSelectedUnit(newUnit);
+        // re-render from saved data if available
+        const last = loadLastWeatherData();
+        if (last) renderFromSavedWeatherData(last);
+        // hide the settings dropdown
+        if (settingsDropdown) {
+            settingsDropdown.classList.remove('show');
+            settingsDropdown.setAttribute('aria-hidden', 'true');
         }
-    );
-} else {
-  alert("Geolocation is not supported by your browser.");
+    });
+}
+
+if (settingsIconEl) {
+    settingsIconEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        console.log('settings icon clicked');
+        if (!settingsDropdown) {
+            console.warn('settings dropdown element not found');
+            return;
+        }
+        console.log('settingsDropdown exists, classes:', settingsDropdown.className);
+        const isShown = settingsDropdown.classList.contains('show');
+        if (isShown) {
+            settingsDropdown.classList.remove('show');
+            settingsDropdown.setAttribute('aria-hidden', 'true');
+            console.log('settings dropdown hidden');
+        } else {
+            settingsDropdown.classList.add('show');
+            settingsDropdown.setAttribute('aria-hidden', 'false');
+            console.log('settings dropdown shown');
+        }
+    });
+
+    // close when clicking elsewhere
+    document.addEventListener('click', (ev) => {
+        if (!settingsDropdown) return;
+        if (!ev.target.closest || ev.target.closest('#settings-icon') || ev.target.closest('.js-settings-dropdown')) return;
+        settingsDropdown.classList.remove('show');
+        settingsDropdown.setAttribute('aria-hidden', 'true');
+    });
 }

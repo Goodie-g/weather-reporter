@@ -53,6 +53,38 @@
     padding: .5rem .75rem;
 }
 
+.settings-dropdown {
+    position: absolute;
+    top: 16%;
+    right: 0.25rem;
+    min-width: 220px;
+    background: rgb(238, 238, 248);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    padding: .5rem;
+    z-index: 40;
+    display: none;
+}
+
+.settings-dropdown.show {
+    display: block;
+}
+
+.settings-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: #6FB6E7;
+    font-size: .95rem;
+    padding: .35rem .25rem;
+}
+
+.settings-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
 .search-input {
     height: 2rem;
 
