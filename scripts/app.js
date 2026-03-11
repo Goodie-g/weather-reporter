@@ -9,6 +9,7 @@ import { displayTenDayForecast } from './pages/main page/3-day-forecast.js';
 export let selectedUnit = 'C';
 const UNIT_KEY = 'weatherUnit';
 const LAST_WEATHER_KEY = 'lastWeatherData';
+let lastKnownCoords = null;
 
 function loadSelectedUnit() {
     try {
@@ -241,6 +242,10 @@ if (!_lastSaved) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
+                // cache last known coords for reuse to avoid re-prompting
+                lastKnownCoords = { lat: latitude, lon: longitude };
+                try { localStorage.setItem('lastCoords', JSON.stringify(lastKnownCoords)); } catch(e) {}
+
             // From Uiverse.io by Shoh2008
 
             document.querySelector('.js-weather-details').innerHTML = '<div class="loader"></div>'
@@ -324,5 +329,70 @@ if (settingsIconEl) {
         if (!ev.target.closest || ev.target.closest('#settings-icon') || ev.target.closest('.js-settings-dropdown')) return;
         settingsDropdown.classList.remove('show');
         settingsDropdown.setAttribute('aria-hidden', 'true');
+    });
+}
+
+// Make site heading clickable: load current location weather and scroll to top
+const siteHeading = document.getElementById('site-heading');
+if (siteHeading) {
+    siteHeading.style.cursor = 'pointer';
+    siteHeading.addEventListener('click', () => {
+        if (!("geolocation" in navigator)) {
+            showErrorMessage(new Error('Geolocation is not supported by your browser.'));
+            return;
+        }
+
+        // show loader while resolving location
+        if (weatherDetailsSection) weatherDetailsSection.innerHTML = '<div class="loader"></div>';
+
+        // If we already have last known coords (same session or persisted), reuse them
+        if (lastKnownCoords) {
+            renderWeatherdata(`${lastKnownCoords.lat}, ${lastKnownCoords.lon}`, false);
+            try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { /* ignore */ }
+            return;
+        }
+        try {
+            const stored = localStorage.getItem('lastCoords');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (parsed && parsed.lat && parsed.lon) {
+                    lastKnownCoords = parsed;
+                    renderWeatherdata(`${parsed.lat}, ${parsed.lon}`, false);
+                    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { /* ignore */ }
+                    return;
+                }
+            }
+        } catch(e) { /* ignore */ }
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            // cache coords
+            lastKnownCoords = { lat, lon };
+            try { localStorage.setItem('lastCoords', JSON.stringify(lastKnownCoords)); } catch(e) {}
+            renderWeatherdata(`${lat}, ${lon}`, false);
+            try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { /* ignore */ }
+        }, (error) => {
+            let errorMessage;
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMessage = "Location access was denied. Please enable location services in your browser or device settings.";
+                    break;
+                case error.TIMEOUT:
+                    errorMessage = "The request to get user location timed out. Please try again.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    errorMessage = "An unknown error occurred while getting your location.";
+                    break;
+                default:
+                    errorMessage = "An error occurred while getting your location: " + error.message;
+            }
+            showErrorMessage(new Error(errorMessage));
+            console.error('Geolocation error:', errorMessage);
+        }, {
+            timeout: 10000,
+            maximumAge: 0,
+            enableHighAccuracy: true
+        });
     });
 }
