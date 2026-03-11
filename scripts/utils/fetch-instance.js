@@ -10,15 +10,22 @@ export async function getWeatherData(location) {
         const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&aqi=no&days=3`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
        
-        const weatherData = await response.json();
+            const weatherData = await response.json();
         
-        if (weatherData.error) {
-            throw new Error(weatherData.error.message);
-        }
-        return weatherData;
+            if (weatherData.error) {
+                console.log('API error response:', weatherData.error);
+                const apiErrorMessage = weatherData.error.message || weatherData.error.msg || JSON.stringify(weatherData.error);
+                const err = new Error(apiErrorMessage || `API error`);
+                // Attach code/type if available so downstream can make better decisions
+                err.code = weatherData.error.code || weatherData.error.type || response.status;
+                throw err;
+            }
+            return weatherData;
 
 
     } catch(error) {
-        showErrorMessage(error);
+        // Log and rethrow so callers can handle the error consistently.
+        console.error('getWeatherData error:', error);
+        throw error;
     }
 }

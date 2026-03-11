@@ -1,37 +1,54 @@
 let errorTimeout;
 
 function getUserFriendlyMessage(error) {
-  const message = error.message || error.toString();
+  // Normalize inputs
+  const code = error && (error.code || error.status || (error.response && error.response.status));
+  const rawMessage = error && (error.message || (typeof error === 'string' ? error : null));
+  let message = rawMessage || (typeof error === 'string' ? error : '') || '';
+  if (message === 'undefined') message = '';
 
-  if (message.includes('Failed to fetch') || message.includes('NetworkError')) {
+  // Prefer code-based mapping when available
+  if (code) {
+    const codeStr = String(code);
+    if (codeStr === '401') return 'API access denied. Please check your API key.';
+    if (codeStr === '403') return 'Access forbidden. Please check your API key or contact support.';
+    if (codeStr.startsWith('4')) return 'Invalid request or location not found. Please verify the location and try again.';
+    if (codeStr.startsWith('5')) return 'The weather service is experiencing issues. Please try again later.';
+  }
+
+  // Fall back to message-based heuristics
+  const normalized = message.toLowerCase();
+  if (normalized.includes('failed to fetch') || normalized.includes('networkerror') || normalized.includes('network error')) {
     return 'Unable to connect to the weather service. Please check your internet connection and try again.';
   }
 
-  if (message.includes('400') || message.includes('Bad Request')) {
+  if (normalized.includes('400') || normalized.includes('bad request')) {
     return 'Invalid location. Please enter a valid city, country, or location name.';
   }
 
-  if (message.includes('401') || message.includes('Unauthorized')) {
+  if (normalized.includes('401') || normalized.includes('unauthorized')) {
     return 'API access denied. The weather service may be temporarily unavailable. Please try again later.';
   }
 
-  if (message.includes('403') || message.includes('Forbidden')) {
+  if (normalized.includes('403') || normalized.includes('forbidden')) {
     return 'Access forbidden. Please check your API key or contact support.';
   }
 
-  if (message.includes('404') || message.includes('Not Found')) {
+  if (normalized.includes('404') || normalized.includes('not found')) {
     return 'Location not found. Please verify the spelling and try again.';
   }
 
-  if (message.includes('500') || message.includes('Internal Server Error')) {
+  if (normalized.includes('500') || normalized.includes('internal server error')) {
     return 'The weather service is experiencing issues. Please try again in a few minutes.';
   }
 
-  if (message.includes('location is required')) {
+  if (normalized.includes('location is required') || normalized.includes('location is required.')) {
     return 'Please enter a location to get the weather information.';
   }
 
-  // Default message
+  // If we have a raw message that's meaningful, show it; else default
+  if (message) return message;
+
   return 'An unexpected error occurred while fetching weather data. Please try again.';
 }
 
