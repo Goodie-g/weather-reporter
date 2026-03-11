@@ -1,12 +1,13 @@
-import { tempUnits, selectedUnit } from '../../app.js';
+import { selectedUnit } from '../../app.js';
+import { units } from '../../utils/units.js';
 
 export function displayOtherWeatherDetails(weatherData) {
     const currentWeatherData = weatherData.current;
-    const useF = selectedUnit === tempUnits.F;
-    const wind = useF ? `${currentWeatherData.wind_mph} mph` : `${currentWeatherData.wind_kph} kph`;
-    const vis = useF ? `${currentWeatherData.vis_miles} miles` : `${currentWeatherData.vis_km} km`;
-    const pressure = useF ? `${currentWeatherData.pressure_in} in` : `${currentWeatherData.pressure_mb} mb`;
-    const precip = useF ? `${currentWeatherData.precip_in} in` : `${currentWeatherData.precip_mm} mm`;
+    const useF = selectedUnit === units.temperature.F;
+    const wind = useF ? `${currentWeatherData.wind_mph} ${units.speed.mph}` : `${currentWeatherData.wind_kph} ${units.speed.kph}`;
+    const vis = useF ? `${currentWeatherData.vis_miles} ${units.distance.miles}` : `${currentWeatherData.vis_km} ${units.distance.km}`;
+    const pressure = useF ? `${currentWeatherData.pressure_in} ${units.pressure.in}` : `${currentWeatherData.pressure_mb} ${units.pressure.mb}`;
+    const precip = useF ? `${currentWeatherData.precip_in} ${units.precipitation.in}` : `${currentWeatherData.precip_mm} ${units.precipitation.mm}`;
 
     return `
         <section class="other-weather-details"> 

@@ -6,11 +6,6 @@ import { displayHourlyForecast } from './pages/main page/hourly-forecast.js';
 import { displayOtherWeatherDetails } from './pages/main page/other-weather-details.js';
 import { displayTenDayForecast } from './pages/main page/3-day-forecast.js';
 
-export const tempUnits = {
-    C: 'C',
-    F: 'F'
-};
-
 export let selectedUnit = 'C';
 const UNIT_KEY = 'weatherUnit';
 const LAST_WEATHER_KEY = 'lastWeatherData';
