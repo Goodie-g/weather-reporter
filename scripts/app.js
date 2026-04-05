@@ -5,9 +5,9 @@ import { displayCurrentWeatherData } from './pages/main page/current-weather-dat
 import { displayHourlyForecast } from './pages/main page/hourly-forecast.js';
 import { displayOtherWeatherDetails } from './pages/main page/other-weather-details.js';
 import { displayTenDayForecast } from './pages/main page/3-day-forecast.js';
-import { inject } from "@vercel/analytics"
+// import { inject } from "@vercel/analytics"
 
-inject()
+// inject()
 
 export let selectedUnit = 'C';
 const UNIT_KEY = 'weatherUnit';
