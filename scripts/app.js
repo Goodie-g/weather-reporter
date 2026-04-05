@@ -295,7 +295,7 @@ if (!_lastSaved) {
             },
             {
             // Optional options: timeout and accuracy
-            timeout: 10000,
+            timeout: 15000,
             maximumAge: 0,
             enableHighAccuracy: true
             }
